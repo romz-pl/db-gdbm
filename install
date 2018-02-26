@@ -1,0 +1,31 @@
+#!/bin/bash
+
+
+#
+# Compile google test library
+#
+cd 3rdparty/googletest || exit 1
+make gtest.a || exit 1
+
+#
+# Compile romzgdbm library
+#
+cd ../.. || exit 1
+rm -rf build || exit 1
+mkdir build || exit 1
+cd build || exit 1
+cmake .. || exit 1
+make || exit 1
+
+
+#
+# Compile and run tests
+#
+cd ../tests || exit 1
+rm -rf build || exit 1
+mkdir build || exit 1
+cd build || exit 1
+cmake .. || exit 1
+make || exit 1
+./all.x
+

@@ -7,4 +7,3 @@ project(romz-gdbm)
 
 add_subdirectory(src)
 
-# add_subdirectory(tests)

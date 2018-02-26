@@ -1,0 +1,7 @@
+build/*
+
+tests/build/*
+
+3rdparty/googletest/gtest-all.o
+3rdparty/googletest/gtest.a
+
