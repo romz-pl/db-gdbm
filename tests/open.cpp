@@ -1,11 +1,32 @@
 #include <gtest/gtest.h>
+#include <gdbm.h>
+#include <unistd.h>
 
-TEST(Db, Open)
+TEST(gdbm, open)
 {
-/*    const std::string path = UnixFile::GetTempPath();
-    std::size_t frameNo = 13;
+    GDBM_FILE dbf;
+    char dbname[] = "./tmp.db";
 
-    Db db( path, frameNo );
-    EXPECT_NO_THROW( db.CreteHeapFile() );
-*/
+    dbf = gdbm_open( dbname, 0, GDBM_NEWDB, 0600, NULL );
+    EXPECT_TRUE( dbf );
+    EXPECT_NO_THROW( gdbm_close( dbf ) );
+
+    dbf = gdbm_open( dbname, 0, GDBM_READER, 0600, NULL );
+    EXPECT_TRUE( dbf );
+    EXPECT_NO_THROW( gdbm_close( dbf ) );
+
+    dbf = gdbm_open( dbname, 0, GDBM_WRITER, 0600, NULL );
+    EXPECT_TRUE( dbf );
+    EXPECT_NO_THROW( gdbm_close( dbf ) );
+
+    EXPECT_TRUE( unlink( dbname ) == 0 );
+
+
+    dbf = gdbm_open( dbname, 0, GDBM_READER, 0600, NULL );
+    EXPECT_FALSE( dbf );
+
+    dbf = gdbm_open( dbname, 0, GDBM_WRITER, 0600, NULL );
+    EXPECT_FALSE( dbf );
+
 }
+
