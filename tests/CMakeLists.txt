@@ -6,6 +6,7 @@ add_executable(all.x
 insert.cpp
 main.cpp
 open.cpp
+scan.cpp
 )
 
 target_include_directories(all.x PUBLIC ${PROJECT_SOURCE_DIR}/../3rdparty/googletest/include)
