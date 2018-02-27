@@ -91,7 +91,6 @@ void Delete( GDBM_FILE dbf, Data& data )
 
         fetched = gdbm_fetch( dbf, key );
         EXPECT_TRUE( fetched.dptr );
-
         EXPECT_EQ( fetched.dsize, content.dsize );
         EXPECT_TRUE( memcmp( fetched.dptr, content.dptr, fetched.dsize ) == 0 );
 
