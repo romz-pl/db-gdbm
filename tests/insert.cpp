@@ -107,7 +107,7 @@ void Delete( GDBM_FILE dbf, Data& data )
 }
 
 
-TEST(gdbm, store_fetch_delete)
+TEST(gdbm, insert)
 {
     GDBM_FILE dbf;
     char dbname[] = "./tmp.db";
