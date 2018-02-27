@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project(romz-gdbm-tests)
 
 add_executable(all.x
+delete.cpp
 insert.cpp
 main.cpp
 open.cpp
