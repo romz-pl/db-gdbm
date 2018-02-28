@@ -479,41 +479,42 @@ gdbm_fd_open (int fd, const char *file_name, int block_size,
 
 
 GDBM_FILE 
-gdbm_open (const char *file, int block_size, int flags, int mode,
-           void (*fatal_func) (const char *))
+gdbm_open( const char *file, int block_size, int flags, int mode,
+           void ( *fatal_func ) ( const char * ) )
 {
-    int fd;
     /* additional bits for open(2) flags */
     int fbits = 0;
 
-    switch (flags & GDBM_OPENMASK)
+    switch( flags & GDBM_OPENMASK )
     {
-    case GDBM_READER:
-        fbits = O_RDONLY;
+        case GDBM_READER:
+            fbits = O_RDONLY;
         break;
 
-    case GDBM_WRITER:
-        fbits = O_RDWR;
+        case GDBM_WRITER:
+            fbits = O_RDWR;
         break;
 
-    case GDBM_NEWDB:
-        fbits = O_RDWR|O_CREAT;
+        case GDBM_NEWDB:
+            fbits = O_RDWR | O_CREAT;
         break;
 
-    default:
-        fbits = O_RDWR|O_CREAT;
+        default:
+            fbits = O_RDWR | O_CREAT;
+        break;
     }
-    if (flags & GDBM_CLOEXEC)
+
+    if( flags & GDBM_CLOEXEC )
         fbits |= O_CLOEXEC;
 
-    fd = open (file, fbits, mode);
-    if (fd < 0)
+    const int fd = open( file, fbits, mode );
+    if( fd < 0 )
     {
-        GDBM_SET_ERRNO2 (NULL, GDBM_FILE_OPEN_ERROR, FALSE, GDBM_DEBUG_OPEN);
+        GDBM_SET_ERRNO2( NULL, GDBM_FILE_OPEN_ERROR, FALSE, GDBM_DEBUG_OPEN );
         return NULL;
     }
-    return gdbm_fd_open (fd, file, block_size, flags | GDBM_CLOERROR,
-                         fatal_func);
+
+    return gdbm_fd_open( fd, file, block_size, flags | GDBM_CLOERROR, fatal_func );
 }
 
 /* Initialize the bucket cache. */
