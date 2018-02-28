@@ -66,7 +66,7 @@
 #define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have a working `mmap' system call. */
-#define HAVE_MMAP 1
+/* #define HAVE_MMAP */
 
 /* Define to 1 if you have the `msync' function. */
 #define HAVE_MSYNC 1
