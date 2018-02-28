@@ -81,7 +81,7 @@ _gdbm_base64_decode (const unsigned char *input, size_t input_len,
 		     size_t *inbytes, size_t *outbytes)
 {
   int rc = 0;
-  int olen = input_len;
+  size_t olen = input_len;
   unsigned char *out;
   size_t ins = 0;
   

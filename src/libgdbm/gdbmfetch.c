@@ -68,7 +68,9 @@ gdbm_fetch (GDBM_FILE dbf, datum key)
 			"%s: found", dbf->name);
     }
   else
+  {
     GDBM_DEBUG (GDBM_DEBUG_READ, "%s: key not found", dbf->name);
+  }
   
   return return_val;
 }

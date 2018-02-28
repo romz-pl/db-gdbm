@@ -54,7 +54,7 @@ _gdbm_get_bucket (GDBM_FILE dbf, int dir_index)
   int rc;
   off_t bucket_adr;	/* The address of the correct hash bucket.  */
   off_t	file_pos;	/* The return address for lseek. */
-  int   index;		/* Loop index. */
+  size_t   index;		/* Loop index. */
 
   /* Initial set up. */
   dbf->bucket_dir = dir_index;
@@ -127,7 +127,7 @@ _gdbm_read_bucket_at (GDBM_FILE dbf, off_t off, hash_bucket *bucket,
 		      size_t size)
 {
   off_t file_pos;
-  int i;
+  size_t i;
 
   if (dbf->cache_entry && dbf->cache_entry->ca_adr == off)
     {

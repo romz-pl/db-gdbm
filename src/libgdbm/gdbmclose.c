@@ -29,7 +29,7 @@
 void
 gdbm_close (GDBM_FILE dbf)
 {
-  int index;	/* For freeing the bucket cache. */
+  size_t index;	/* For freeing the bucket cache. */
 
   if (dbf->desc != -1)
     {

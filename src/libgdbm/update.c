@@ -79,7 +79,7 @@ _gdbm_end_update (GDBM_FILE dbf)
     {
       if (dbf->bucket_cache != NULL)
         {
-          int index;
+          size_t index;
 
           for (index = 0; index < dbf->cache_size; index++)
 	    {

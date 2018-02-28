@@ -91,7 +91,7 @@ static int
 _gdbm_finish_transfer (GDBM_FILE dbf, GDBM_FILE new_dbf,
 		       gdbm_recovery *rcvr, int flags)
 {
-  int i;
+  size_t i;
   
   /* Write everything. */
   if (_gdbm_end_update (new_dbf))

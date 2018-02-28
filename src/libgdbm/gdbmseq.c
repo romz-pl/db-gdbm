@@ -116,10 +116,14 @@ gdbm_firstkey (GDBM_FILE dbf)
   /* Look for first entry. */
   get_next_key (dbf, -1, &return_val);
 
-  if (return_val.dptr) 
+  if (return_val.dptr)
+  {
     GDBM_DEBUG_DATUM (GDBM_DEBUG_READ, return_val, "%s: found", dbf->name);
+  }
   else
+  {
     GDBM_DEBUG (GDBM_DEBUG_READ, "%s: key not found", dbf->name);
+  }
   
   return return_val;
 }
@@ -162,9 +166,13 @@ gdbm_nextkey (GDBM_FILE dbf, datum key)
   get_next_key (dbf, elem_loc, &return_val);
 
   if (return_val.dptr) 
+  {
     GDBM_DEBUG_DATUM (GDBM_DEBUG_READ, return_val, "%s: found", dbf->name);
+  }
   else
+  {
     GDBM_DEBUG (GDBM_DEBUG_READ, "%s: key not found", dbf->name);
+  }
 
   return return_val;
 }

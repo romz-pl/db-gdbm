@@ -32,7 +32,7 @@
 #endif
 
 static void
-compute_directory_size (GDBM_FILE dbf, blksize_t block_size,
+compute_directory_size (blksize_t block_size,
 			int *ret_dir_size, int *ret_dir_bits)
 {
   /* Create the initial hash table directory.  */
@@ -56,7 +56,7 @@ gdbm_fd_open (int fd, const char *file_name, int block_size,
   GDBM_FILE dbf;		/* The record to return. */
   struct stat file_stat;	/* Space for the stat information. */
   off_t       file_pos;		/* Used with seeks. */
-  int 	      index;		/* Used as a loop index. */
+  size_t 	  index;		/* Used as a loop index. */
   
   /* Initialize the gdbm_errno variable. */
   gdbm_set_errno (NULL, GDBM_NO_ERROR, FALSE);
@@ -194,7 +194,7 @@ gdbm_fd_open (int fd, const char *file_name, int block_size,
 	  block_size = STATBLKSIZE (file_stat);
 	  flags &= ~GDBM_BSEXACT;
 	}
-      compute_directory_size (dbf, block_size, &dir_size, &dir_bits);
+      compute_directory_size (block_size, &dir_size, &dir_bits);
       GDBM_DEBUG (GDBM_DEBUG_OPEN, "%s: computed dir_size=%d, dir_bits=%d",
 		  dbf->name, dir_size, dir_bits);
       /* Check for correct block_size. */
@@ -520,7 +520,7 @@ gdbm_open (const char *file, int block_size, int flags, int mode,
 int
 _gdbm_init_cache (GDBM_FILE dbf, size_t size)
 {
-  int index;
+  size_t index;
 
   if (dbf->bucket_cache == NULL)
     {
