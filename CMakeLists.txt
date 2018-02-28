@@ -8,3 +8,4 @@ project(romz-gdbm)
 add_subdirectory(src)
 add_subdirectory(tests)
 
+add_subdirectory(examples/ex01)
