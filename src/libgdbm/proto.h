@@ -22,7 +22,7 @@
 void _gdbm_new_bucket	(GDBM_FILE, hash_bucket *, int);
 int _gdbm_get_bucket	(GDBM_FILE, int);
 int _gdbm_read_bucket_at (GDBM_FILE dbf, off_t off, hash_bucket *bucket,
-			  size_t size);
+                          size_t size);
 
 int _gdbm_split_bucket (GDBM_FILE, int);
 int _gdbm_write_bucket (GDBM_FILE, cache_elem *);
@@ -39,7 +39,7 @@ int _gdbm_findkey       (GDBM_FILE, datum, char **, int *);
 /* From hash.c */
 int _gdbm_hash (datum);
 void _gdbm_hash_key (GDBM_FILE dbf, datum key, int *hash, int *bucket,
-		     int *offset);
+                     int *offset);
 int _gdbm_bucket_dir (GDBM_FILE dbf, int hash);
 
 /* From update.c */
@@ -67,11 +67,11 @@ int _gdbm_full_write (GDBM_FILE, void *, size_t);
 
 /* From base64.c */
 int _gdbm_base64_encode (const unsigned char *input, size_t input_len,
-			 unsigned char **output, size_t *output_size,
-			 size_t *outbytes);
+                         unsigned char **output, size_t *output_size,
+                         size_t *outbytes);
 int _gdbm_base64_decode (const unsigned char *input, size_t input_len,
-			 unsigned char **output, size_t *output_size,
-			 size_t *inbytes, size_t *outbytes);
+                         unsigned char **output, size_t *output_size,
+                         size_t *inbytes, size_t *outbytes);
 
 int _gdbm_load (FILE *fp, GDBM_FILE *pdbf, unsigned long *line);
 int _gdbm_dump (GDBM_FILE dbf, FILE *fp);

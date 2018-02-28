@@ -15,7 +15,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with GDBM. If not, see <http://www.gnu.org/licenses/>.  
+    along with GDBM. If not, see <http://www.gnu.org/licenses/>.
 
     You may contact the author by:
        e-mail:  phil@cs.wwu.edu
@@ -23,7 +23,7 @@
                 Computer Science Department
                 Western Washington University
                 Bellingham, WA 98226
-       
+
 *************************************************************************/
 
 /* Protection for multiple includes. */
@@ -51,10 +51,10 @@ extern "C" {
 # define GDBM_NOMMAP	0x080	/* Don't use mmap(). */
 # define GDBM_CLOEXEC   0x100   /* Close the underlying fd on exec(3) */
 # define GDBM_BSEXACT   0x200   /* Don't adjust block_size. Bail out with
-				   GDBM_BLOCK_SIZE_ERROR error if unable to
-				   set it. */  
+    GDBM_BLOCK_SIZE_ERROR error if unable to
+    set it. */
 # define GDBM_CLOERROR  0x400   /* Only for gdbm_fd_open: close fd on error. */
-  
+
 /* Parameters to gdbm_store for simple insertion or replacement in the
    case that the key is already in the database. */
 # define GDBM_INSERT	0	/* Never replace old data with new. */
@@ -86,12 +86,12 @@ extern "C" {
 # define GDBM_GETBLOCKSIZE    16 /* Return block size */
 
 typedef unsigned long long int gdbm_count_t;
-  
+
 /* The data and key structure. */
 typedef struct
 {
-  char *dptr;
-  int   dsize;
+    char *dptr;
+    int   dsize;
 } datum;
 
 
@@ -110,9 +110,9 @@ extern int const gdbm_version_number[3];
 /* GDBM external functions. */
 
 extern GDBM_FILE gdbm_fd_open (int fd, const char *file_name, int block_size,
-			       int flags, void (*fatal_func) (const char *));
+                               int flags, void (*fatal_func) (const char *));
 extern GDBM_FILE gdbm_open (const char *, int, int, int,
-			    void (*)(const char *));
+                            void (*)(const char *));
 extern void gdbm_close (GDBM_FILE);
 extern int gdbm_store (GDBM_FILE, datum, datum, int);
 extern datum gdbm_fetch (GDBM_FILE, datum);
@@ -120,39 +120,39 @@ extern int gdbm_delete (GDBM_FILE, datum);
 extern datum gdbm_firstkey (GDBM_FILE);
 extern datum gdbm_nextkey (GDBM_FILE, datum);
 extern int gdbm_reorganize (GDBM_FILE);
-  
+
 extern void gdbm_sync (GDBM_FILE);
 extern int gdbm_exists (GDBM_FILE, datum);
 extern int gdbm_setopt (GDBM_FILE, int, void *, int);
 extern int gdbm_fdesc (GDBM_FILE);
-  
+
 extern int gdbm_export (GDBM_FILE, const char *, int, int);
 extern int gdbm_export_to_file (GDBM_FILE dbf, FILE *fp);
-  
+
 extern int gdbm_import (GDBM_FILE, const char *, int);
 extern int gdbm_import_from_file (GDBM_FILE dbf, FILE *fp, int flag);
 
 extern int gdbm_count (GDBM_FILE dbf, gdbm_count_t *pcount);
-
+
 typedef struct gdbm_recovery_s
 {
-  /* Input members.
+    /* Input members.
      These are initialized before call to gdbm_recover.  The flags argument
      specifies which of them are initialized. */
-  void (*errfun) (void *data, char const *fmt, ...);
-  void *data;
+    void (*errfun) (void *data, char const *fmt, ...);
+    void *data;
 
-  size_t max_failed_keys;
-  size_t max_failed_buckets;
-  size_t max_failures;
+    size_t max_failed_keys;
+    size_t max_failed_buckets;
+    size_t max_failures;
 
-  /* Output members.
+    /* Output members.
      The gdbm_recover function fills these before returning. */
-  size_t recovered_keys;
-  size_t recovered_buckets;
-  size_t failed_keys;
-  size_t failed_buckets;
-  char *backup_name;
+    size_t recovered_keys;
+    size_t recovered_buckets;
+    size_t failed_keys;
+    size_t failed_buckets;
+    char *backup_name;
 } gdbm_recovery;
 
 #define GDBM_RCVR_DEFAULT              0x00  /* Default settings */
@@ -161,29 +161,29 @@ typedef struct gdbm_recovery_s
 #define GDBM_RCVR_MAX_FAILED_BUCKETS   0x04  /* max_failed_buckets is initialized */
 #define GDBM_RCVR_MAX_FAILURES         0x08  /* max_failures is initialized */
 #define GDBM_RCVR_BACKUP               0x10  /* Keep backup copy of the
-						original database on success */
+    original database on success */
 #define GDBM_RCVR_FORCE                0x20  /* Force recovery by skipping the
-						check pass */
-					       
+    check pass */
+
 extern int gdbm_recover (GDBM_FILE dbf, gdbm_recovery *rcvr, int flags);
-  
-  
+
+
 #define GDBM_DUMP_FMT_BINARY 0
 #define GDBM_DUMP_FMT_ASCII  1
 
 #define GDBM_META_MASK_MODE    0x01
 #define GDBM_META_MASK_OWNER   0x02
-  
+
 extern int gdbm_dump (GDBM_FILE, const char *, int fmt, int open_flags,
-		      int mode);
+                      int mode);
 extern int gdbm_dump_to_file (GDBM_FILE, FILE *, int fmt);
 
 extern int gdbm_load (GDBM_FILE *, const char *, int replace,
-		      int meta_flags,
-		      unsigned long *line);
+                      int meta_flags,
+                      unsigned long *line);
 extern int gdbm_load_from_file (GDBM_FILE *, FILE *, int replace,
-				int meta_flags,
-				unsigned long *line);
+                                int meta_flags,
+                                unsigned long *line);
 
 extern int gdbm_copy_meta (GDBM_FILE dst, GDBM_FILE src);
 
@@ -225,13 +225,13 @@ extern int gdbm_copy_meta (GDBM_FILE dst, GDBM_FILE src);
 
 /* This one was never used and will be removed in the future */
 # define GDBM_UNKNOWN_UPDATE GDBM_UNKNOWN_ERROR
-  
+
 typedef int gdbm_error;
 extern int *gdbm_errno_location (void);
 #define gdbm_errno (*gdbm_errno_location ())
 extern const char * const gdbm_errlist[];
 extern int const gdbm_syserr[];
-  
+
 extern gdbm_error gdbm_last_errno (GDBM_FILE dbf);
 extern int gdbm_last_syserr (GDBM_FILE dbf);
 extern void gdbm_set_errno (GDBM_FILE dbf, gdbm_error ec, int fatal);
@@ -243,7 +243,7 @@ extern int gdbm_check_syserr (gdbm_error n);
 
 extern const char *gdbm_strerror (gdbm_error);
 extern const char *gdbm_db_strerror (GDBM_FILE dbf);
-  
+
 extern int gdbm_version_cmp (int const a[], int const b[]);
 
 #if 0
@@ -258,17 +258,17 @@ extern int gdbm_debug_flags;
 # define GDBM_DEBUG_READ   0x00000004
 # define GDBM_DEBUG_STORE  0x00000008
 # define GDBM_DEBUG_LOOKUP 0x00000010
-  
+
 # define GDBM_DEBUG_ALL    0xffffffff
 
 extern int gdbm_debug_token (char const *tok);
 extern void gdbm_debug_parse_state (int (*f) (void *, int, char const *),
-				    void *d);
-  
+                                    void *d);
+
 extern void gdbm_debug_datum (datum dat, char const *pfx);
-  
+
 #endif
-  
+
 # if defined(__cplusplus) || defined(c_plusplus)
 }
 # endif
