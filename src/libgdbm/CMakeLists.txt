@@ -33,4 +33,4 @@ update.c
 version.c
 )
 
-target_compile_options( gdbm PRIVATE -Wall -Wextra )
+target_compile_options( gdbm PRIVATE -Wall -Wextra -std=gnu11)
