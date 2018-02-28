@@ -24,26 +24,26 @@
 int
 _gdbm_full_read (GDBM_FILE dbf, void *buffer, size_t size)
 {
-  char *ptr = buffer;
-  while (size)
+    char *ptr = buffer;
+    while (size)
     {
-      ssize_t rdbytes = __read (dbf, ptr, size);
-      if (rdbytes == -1)
-	{
-	  if (errno == EINTR)
-	    continue;
-	  GDBM_SET_ERRNO (dbf, GDBM_FILE_READ_ERROR, FALSE);
-	  return -1;
-	}
-      if (rdbytes == 0)
-	{
-	  GDBM_SET_ERRNO (dbf, GDBM_FILE_EOF, FALSE);
-	  return -1;
-	}
-      ptr += rdbytes;
-      size -= rdbytes;
+        ssize_t rdbytes = __read (dbf, ptr, size);
+        if (rdbytes == -1)
+        {
+            if (errno == EINTR)
+                continue;
+            GDBM_SET_ERRNO (dbf, GDBM_FILE_READ_ERROR, FALSE);
+            return -1;
+        }
+        if (rdbytes == 0)
+        {
+            GDBM_SET_ERRNO (dbf, GDBM_FILE_EOF, FALSE);
+            return -1;
+        }
+        ptr += rdbytes;
+        size -= rdbytes;
     }
-  return 0;
+    return 0;
 }
 
 /* Write exactly SIZE bytes of data from BUFFER tp DBF.  Return 0 on
@@ -51,25 +51,25 @@ _gdbm_full_read (GDBM_FILE dbf, void *buffer, size_t size)
 int
 _gdbm_full_write (GDBM_FILE dbf, void *buffer, size_t size)
 {
-  char *ptr = buffer;
-  while (size)
+    char *ptr = buffer;
+    while (size)
     {
-      ssize_t wrbytes = __write (dbf, ptr, size);
-      if (wrbytes == -1)
-	{
-	  if (errno == EINTR)
-	    continue;
-	  GDBM_SET_ERRNO (dbf, GDBM_FILE_WRITE_ERROR, TRUE);
-	  return -1;
-	}
-      if (wrbytes == 0)
-	{
-	  errno = ENOSPC;
-	  GDBM_SET_ERRNO (dbf, GDBM_FILE_WRITE_ERROR, TRUE);
-	  return -1;
-	}
-      ptr += wrbytes;
-      size -= wrbytes;
+        ssize_t wrbytes = __write (dbf, ptr, size);
+        if (wrbytes == -1)
+        {
+            if (errno == EINTR)
+                continue;
+            GDBM_SET_ERRNO (dbf, GDBM_FILE_WRITE_ERROR, TRUE);
+            return -1;
+        }
+        if (wrbytes == 0)
+        {
+            errno = ENOSPC;
+            GDBM_SET_ERRNO (dbf, GDBM_FILE_WRITE_ERROR, TRUE);
+            return -1;
+        }
+        ptr += wrbytes;
+        size -= wrbytes;
     }
-  return 0;
+    return 0;
 }

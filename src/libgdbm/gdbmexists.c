@@ -28,14 +28,14 @@
 int
 gdbm_exists (GDBM_FILE dbf, datum key)
 {
-  /* Return immediately if the database needs recovery */	
-  GDBM_ASSERT_CONSISTENCY (dbf, 0);
-  
-  if (_gdbm_findkey (dbf, key, NULL, NULL) < 0)
+    /* Return immediately if the database needs recovery */
+    GDBM_ASSERT_CONSISTENCY (dbf, 0);
+
+    if (_gdbm_findkey (dbf, key, NULL, NULL) < 0)
     {
-      if (gdbm_errno == GDBM_ITEM_NOT_FOUND)
-	gdbm_set_errno (dbf, GDBM_NO_ERROR, FALSE);
-      return 0;
+        if (gdbm_errno == GDBM_ITEM_NOT_FOUND)
+            gdbm_set_errno (dbf, GDBM_NO_ERROR, FALSE);
+        return 0;
     }
-  return 1;
+    return 1;
 }

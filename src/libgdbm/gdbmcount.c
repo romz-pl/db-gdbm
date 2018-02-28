@@ -24,19 +24,19 @@
 int
 gdbm_count (GDBM_FILE dbf, gdbm_count_t *pcount)
 {
-  int nbuckets = GDBM_DIR_COUNT (dbf);
-  gdbm_count_t count = 0;
-  int i;
-  
-  /* Return immediately if the database needs recovery */	
-  GDBM_ASSERT_CONSISTENCY (dbf, -1);
-  
-  for (i = 0; i < nbuckets; i = _gdbm_next_bucket_dir (dbf, i))
+    int nbuckets = GDBM_DIR_COUNT (dbf);
+    gdbm_count_t count = 0;
+    int i;
+
+    /* Return immediately if the database needs recovery */
+    GDBM_ASSERT_CONSISTENCY (dbf, -1);
+
+    for (i = 0; i < nbuckets; i = _gdbm_next_bucket_dir (dbf, i))
     {
-      if (_gdbm_get_bucket (dbf, i))
-	return -1;
-      count += dbf->bucket->count;
+        if (_gdbm_get_bucket (dbf, i))
+            return -1;
+        count += dbf->bucket->count;
     }
-  *pcount = count;
-  return 0;
+    *pcount = count;
+    return 0;
 }

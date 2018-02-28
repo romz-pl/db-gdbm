@@ -29,38 +29,38 @@
 void
 gdbm_close (GDBM_FILE dbf)
 {
-  size_t index;	/* For freeing the bucket cache. */
+    size_t index;	/* For freeing the bucket cache. */
 
-  if (dbf->desc != -1)
+    if (dbf->desc != -1)
     {
-      /* Make sure the database is all on disk. */
-      if (dbf->read_write != GDBM_READER)
-	__fsync (dbf);
+        /* Make sure the database is all on disk. */
+        if (dbf->read_write != GDBM_READER)
+            __fsync (dbf);
 
-      /* Close the file and free all malloced memory. */
+        /* Close the file and free all malloced memory. */
 #if HAVE_MMAP
-      _gdbm_mapped_unmap (dbf);
+        _gdbm_mapped_unmap (dbf);
 #endif
-      if (dbf->file_locking)
-	_gdbm_unlock_file (dbf);
+        if (dbf->file_locking)
+            _gdbm_unlock_file (dbf);
 
-      close (dbf->desc);
+        close (dbf->desc);
     }
 
-  gdbm_clear_error (dbf);
-  
-  free (dbf->name);
-  free (dbf->dir);
+    gdbm_clear_error (dbf);
 
-  if (dbf->bucket_cache != NULL)
+    free (dbf->name);
+    free (dbf->dir);
+
+    if (dbf->bucket_cache != NULL)
     {
-      for (index = 0; index < dbf->cache_size; index++)
-	{
-	  free (dbf->bucket_cache[index].ca_bucket);
-	  free (dbf->bucket_cache[index].ca_data.dptr);
-	}
-      free (dbf->bucket_cache);
+        for (index = 0; index < dbf->cache_size; index++)
+        {
+            free (dbf->bucket_cache[index].ca_bucket);
+            free (dbf->bucket_cache[index].ca_data.dptr);
+        }
+        free (dbf->bucket_cache);
     }
-  free (dbf->header);
-  free (dbf);
+    free (dbf->header);
+    free (dbf);
 }

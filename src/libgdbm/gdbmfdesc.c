@@ -27,5 +27,5 @@
 int
 gdbm_fdesc(GDBM_FILE dbf)
 {
-  return (dbf->desc);
+    return (dbf->desc);
 }

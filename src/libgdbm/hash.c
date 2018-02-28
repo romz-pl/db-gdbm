@@ -30,31 +30,31 @@
 int
 _gdbm_hash (datum key)
 {
-  unsigned int value;	/* Used to compute the hash value.  */
-  int   index;		/* Used to cycle through random values. */
+    unsigned int value;	/* Used to compute the hash value.  */
+    int   index;		/* Used to cycle through random values. */
 
-  /* Set the initial value from key. */
-  value = 0x238F13AF * key.dsize;
-  for (index = 0; index < key.dsize; index++)
-    value = (value + (key.dptr[index] << (index*5 % 24))) & 0x7FFFFFFF;
+    /* Set the initial value from key. */
+    value = 0x238F13AF * key.dsize;
+    for (index = 0; index < key.dsize; index++)
+        value = (value + (key.dptr[index] << (index*5 % 24))) & 0x7FFFFFFF;
 
-  value = (1103515243 * value + 12345) & 0x7FFFFFFF;  
+    value = (1103515243 * value + 12345) & 0x7FFFFFFF;
 
-  /* Return the value. */
-  return((int) value);
+    /* Return the value. */
+    return((int) value);
 }
 
 int
 _gdbm_bucket_dir (GDBM_FILE dbf, int hash)
 {
-  return hash >> (GDBM_HASH_BITS - dbf->header->dir_bits);
+    return hash >> (GDBM_HASH_BITS - dbf->header->dir_bits);
 }
 
 void
 _gdbm_hash_key (GDBM_FILE dbf, datum key, int *hash, int *bucket, int *offset)
 {
-  int hashval = _gdbm_hash (key);
-  *hash = hashval;
-  *bucket = _gdbm_bucket_dir (dbf, hashval);
-  *offset = hashval % dbf->header->bucket_elems;
+    int hashval = _gdbm_hash (key);
+    *hash = hashval;
+    *bucket = _gdbm_bucket_dir (dbf, hashval);
+    *offset = hashval % dbf->header->bucket_elems;
 }

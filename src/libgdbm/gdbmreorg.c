@@ -31,11 +31,11 @@
 int
 gdbm_reorganize (GDBM_FILE dbf)
 {
-  gdbm_recovery rcvr;
-  
-  /* Return immediately if the database needs recovery */	
-  GDBM_ASSERT_CONSISTENCY (dbf, -1);
+    gdbm_recovery rcvr;
 
-  rcvr.max_failures = 0;
-  return gdbm_recover (dbf, &rcvr, GDBM_RCVR_MAX_FAILURES|GDBM_RCVR_FORCE);
+    /* Return immediately if the database needs recovery */
+    GDBM_ASSERT_CONSISTENCY (dbf, -1);
+
+    rcvr.max_failures = 0;
+    return gdbm_recover (dbf, &rcvr, GDBM_RCVR_MAX_FAILURES|GDBM_RCVR_FORCE);
 }
