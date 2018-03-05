@@ -54,3 +54,16 @@ TEST(gdbm, open_block_size)
     EXPECT_TRUE( unlink( dbname ) == 0 );
 }
 
+TEST(gdbm, open_sync)
+{
+    GDBM_FILE dbf;
+    char dbname[] = "./tmp.db";
+    int block_size = 0;
+    const int mode = 0600;
+    
+    dbf = gdbm_open( dbname, block_size, GDBM_NEWDB, mode, NULL );
+    EXPECT_TRUE( dbf );
+    EXPECT_NO_THROW( gdbm_sync( dbf ) );
+    EXPECT_NO_THROW( gdbm_close( dbf ) );
+
+}
