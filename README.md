@@ -15,3 +15,4 @@ romz-gdbm
 
 * The API od romz-gdbm is identical to API of GDBM.
  
+* There are various test.
