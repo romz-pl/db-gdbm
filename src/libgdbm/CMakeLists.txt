@@ -34,3 +34,6 @@ version.c
 )
 
 target_compile_options( gdbm PRIVATE -Wall -Wextra -std=gnu11)
+
+target_compile_options( gdbm PRIVATE -Wall -pedantic -pthread -g -O0 -fprofile-arcs -ftest-coverage -std=gnu11 -DNDEBUG -DNOLOGGING )
+
