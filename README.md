@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/romz-pl/romz-gdbm.svg?branch=master)](https://travis-ci.org/romz-pl/romz-gdbm)
+[![Coverage Status](https://codecov.io/gh/romz-pl/romz-gdbm/badge.svg?branch=master)](https://codecov.io/gh/romz-pl/romz-gdbm?branch=master)
+
 romz-gdbm
 =========
 
